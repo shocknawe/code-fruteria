@@ -19,11 +19,11 @@ export const GridDropOverlay: React.FC<GridDropOverlayProps> = ({
     <div
       style={{
         position: "absolute",
-        top: 0,
+        top: 57,
         left: 0,
         right: 0,
         bottom: 0,
-        pointerEvents: visible ? "none" : "none", // Always "none" to avoid interfering with clicks
+        pointerEvents: "none", // Always "none" to avoid interfering with clicks
         display: "grid",
         gridTemplateRows: `repeat(${rows}, 1fr)`,
         gridTemplateColumns: `repeat(${cols}, 1fr)`,
@@ -50,6 +50,7 @@ export const GridDropOverlay: React.FC<GridDropOverlayProps> = ({
               borderRadius: isActive ? 8 : 0,
               boxShadow: isActive ? "0 0 0 2px #7ec7ff88" : undefined,
               pointerEvents: "none", // Prevent grid cell from capturing pointer events
+              userSelect: "none",
             }}
           />
         );

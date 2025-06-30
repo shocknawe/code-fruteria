@@ -425,7 +425,7 @@ const App: FC = () => {
             </div>
           </div>
           {openPanels.length === 0 ? (
-            <div style={{ color: '#888', textAlign: 'center', marginTop: '2rem' }}>
+            <div style={{ color: '#888', textAlign: 'center', marginTop: '2rem', userSelect: "none", pointerEvents: "none" }}>
               No panels open.<br />
               Drag one from the navigation bar.
             </div>
