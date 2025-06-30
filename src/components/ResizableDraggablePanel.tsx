@@ -111,6 +111,7 @@ const ResizableDraggablePanel: React.FC<Props> = ({
             marginLeft: 8,
           }}
           aria-label="Close"
+          data-testid="close"
         >
           ×
         </button>
@@ -130,6 +131,7 @@ const ResizableDraggablePanel: React.FC<Props> = ({
           zIndex: 10,
         }}
         onMouseDown={handleResizeMouseDown}
+        data-testid="resize"
       >
         <svg width="18" height="18">
           <polyline points="3,15 15,15 15,3" fill="none" stroke="#7c5fe6" strokeWidth="2"/>
