@@ -12,7 +12,7 @@ type Props = {
   minHeight?: number;
   onClose: () => void;
   onMove: (dx: number, dy: number) => void;
-  onResize: (dw: number, dh: number) => void;
+  onResize: (dw: number, dh: number, width: number, height: number) => void;
 };
 
 const ResizableDraggablePanel: React.FC<Props> = ({
@@ -51,7 +51,7 @@ const ResizableDraggablePanel: React.FC<Props> = ({
       if (resizeStart.current) {
         const dw = moveEvent.clientX - resizeStart.current.x;
         const dh = moveEvent.clientY - resizeStart.current.y;
-        onResize(dw, dh);
+        onResize(dw, dh, resizeStart.current.width, resizeStart.current.height);
       }
     };
     const handleMouseUp = () => {

@@ -189,13 +189,13 @@ const App: FC = () => {
   };
 
   /**
-   * Resizes a panel by delta width and height.
+   * Resizes a panel by delta width and height + original width and height
    */
-  const handlePanelResize = (id: string, dw: number, dh: number) => {
+  const handlePanelResize = (id: string, dw: number, dh: number, width: number, height: number) => {
     setOpenPanels(panels =>
       panels.map(p =>
         p.id === id
-          ? { ...p, width: Math.max(200, p.width + dw), height: Math.max(100, p.height + dh) }
+          ? { ...p, width: Math.max(200, width + dw), height: Math.max(100, height + dh) }
           : p
       )
     );
@@ -436,7 +436,7 @@ const App: FC = () => {
                 {...panel}
                 onClose={() => handleClose(panel.id)}
                 onMove={(dx, dy) => handlePanelMove(panel.id, dx, dy)}
-                onResize={(dw, dh) => handlePanelResize(panel.id, dw, dh)}
+                onResize={(dw, dh, width, height) => handlePanelResize(panel.id, dw, dh, width, height)}
                 // Add a prop to indicate dragging for overlay z-index if needed
               />
             ))
