@@ -127,6 +127,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onLogout, onThemeToggle, them
             border: '1px solid #35394a',
             color: '#b0b4c1',
           }}
+          data-testid="user-profile-button"
         />
       </div>
       {visible && (
@@ -145,6 +146,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onLogout, onThemeToggle, them
             transition: 'background 0.2s',
           }}
           onClick={handleClose}
+          data-testid="user-profile-popup"
         >
           <div
             style={{ pointerEvents: 'auto' }}

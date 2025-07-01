@@ -14,6 +14,9 @@ module.exports = {
     '/engine/',
     '/mocks/',
     '/server/',
+    // other files
+    '/src/data/',
+    '/src/panelList.tsx',
   ],
   moduleNameMapper: {
     '\\.(css|less|sass|scss)$': 'jest-transform-stub',
