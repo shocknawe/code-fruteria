@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Typography, Switch, Icon } from 'antd';
+import { Button, Typography, Switch } from 'antd';
+import { CloseOutlined, CheckOutlined, UserOutlined } from '@ant-design/icons';
 
 // Styles
 const popoverContainerStyle: React.CSSProperties = {
@@ -100,8 +101,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ onLogout, onThemeToggle, them
       {onThemeToggle && (
         <div style={themeSwitchStyle}>
           <Switch
-            checkedChildren={<Icon type="check" />}
-            unCheckedChildren={<Icon type="close" />}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
             checked={theme === 'dark'}
             onChange={onThemeToggle}
             defaultChecked
@@ -120,7 +121,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onLogout, onThemeToggle, them
       <div style={{ marginLeft: 'auto' }}>
         <Button
           shape="circle"
-          icon="user"
+          icon={<UserOutlined />}
           onClick={handleOpen}
           style={{
             background: '#232634',

@@ -1,12 +1,10 @@
 // import necessary libraries
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import LoginComponent from "./LoginComponent";
 
 const setup = () => {
-  const mockOnLoginSuccess = jest.fn();
-
-  render(<LoginComponent onLoginSuccess={mockOnLoginSuccess} />);
+  render(<LoginComponent />);
 
   const username = screen.getByPlaceholderText("Enter your username");
   const password = screen.getByPlaceholderText("Enter your password");
@@ -16,11 +14,27 @@ const setup = () => {
     username,
     password,
     loginButton,
-    mockOnLoginSuccess,
   };
 };
 
 describe("LoginComponent", () => {
+  // to fix complain of missing window.matchMedia
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+  });
+
   it("renders title, username, password and button", () => {
     const { username, password, loginButton } = setup();
 
@@ -32,51 +46,46 @@ describe("LoginComponent", () => {
     expect(loginButton).toBeInTheDocument();
   });
 
-  it("should render error, on empty submit", () => {
+  it("should render error, on empty submit", async () => {
     const { loginButton } = setup();
 
     fireEvent.click(loginButton);
 
-    const usernameError = screen.getByText("Please input your username!");
-    const passwordError = screen.getByText("Please input your password!");
+    await waitFor(() => {
+      const usernameError = screen.getByText("Please input your username!");
+      const passwordError = screen.getByText("Please input your password!");
 
-    expect(usernameError).toBeInTheDocument();
-    expect(passwordError).toBeInTheDocument();
+      expect(usernameError).toBeInTheDocument();
+      expect(passwordError).toBeInTheDocument();
+    });
   });
 
-  it("should render error, on empty submit", () => {
+  it("should render error, on empty submit", async () => {
     const { loginButton } = setup();
 
     fireEvent.click(loginButton);
 
-    const usernameError = screen.getByText("Please input your username!");
-    const passwordError = screen.getByText("Please input your password!");
+    await waitFor(() => {
+      const usernameError = screen.getByText("Please input your username!");
+      const passwordError = screen.getByText("Please input your password!");
 
-    expect(usernameError).toBeInTheDocument();
-    expect(passwordError).toBeInTheDocument();
+      expect(usernameError).toBeInTheDocument();
+      expect(passwordError).toBeInTheDocument();
+    });
   });
 
   // TODO: implement mock server for login
-  it("should render invalid credentials, on invalid login", () => {
+  it("should render invalid credentials, on invalid login", async () => {
     const { username, password, loginButton } = setup();
 
     fireEvent.change(username, { target: { value: "asdf" } });
     fireEvent.change(password, { target: { value: "asdf" } });
     fireEvent.click(loginButton);
 
-    const error = screen.getByText("Invalid credentials");
+    await waitFor(() => {
+      const error = screen.getByText("Invalid credentials");
 
-    expect(error).toBeInTheDocument();
-  });
-
-  // TODO: implement mock server for login
-  it("should call onLoginSuccess, on valid login", () => {
-    const { username, password, loginButton, mockOnLoginSuccess } = setup();
-
-    fireEvent.change(username, { target: { value: "admin" } });
-    fireEvent.change(password, { target: { value: "1234" } });
-    fireEvent.click(loginButton);
-
-    expect(mockOnLoginSuccess).toHaveBeenCalled();
+      expect(error).toBeInTheDocument();
+    });
   });
 });

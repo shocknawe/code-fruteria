@@ -1,5 +1,6 @@
 import React, { useState, StrictMode, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import LoginComponent from './components/LoginComponent';
 import App from './App';
 
@@ -30,22 +31,14 @@ const Root: React.FC = () => {
 
 // Patch LoginComponent to set login flag and dispatch event
 // (You can move this logic inside LoginComponent if you prefer)
-const origLoginComponent = LoginComponent;
-(LoginComponent as any) = (props: any) => {
-  const [_, forceUpdate] = React.useReducer(x => x + 1, 0);
-  return React.createElement(origLoginComponent, {
-    ...props,
-    onLoginSuccess: () => {
-      localStorage.setItem('isLoggedIn', 'true');
-      window.dispatchEvent(new Event('login-success'));
-      forceUpdate();
-    }
-  });
-};
+// moved to LoginComponent.tsx
 
-ReactDOM.render(
-  <StrictMode>
-    <Root />
-  </StrictMode>,
-  document.getElementById('root')
-);
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <StrictMode>
+      <Root />
+    </StrictMode>
+  );
+}

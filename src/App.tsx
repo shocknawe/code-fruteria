@@ -374,7 +374,6 @@ const App: FC = () => {
                 width: 40,
                 borderRadius: 8,
                 transition: 'background 0.2s',
-                boxShadow: navOpen ? '0 2px 8px #0002' : undefined,
               }}
               aria-label="Toggle navigation"
             >
