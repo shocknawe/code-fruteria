@@ -9,7 +9,6 @@ const setup = () => {
   const props = {
     onLogout: mockOnLogout,
     onThemeToggle: mockOnThemeToggle,
-    theme: 'light',
   }
   render(
     <UserProfile {...props} />

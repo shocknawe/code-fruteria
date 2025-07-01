@@ -2,7 +2,9 @@
   "compilerOptions": {
     "jsx": "react",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "es2015"],
+    "types": ["jest", "@testing-library/jest-dom"],
   },
   "include": ["src"]
 }

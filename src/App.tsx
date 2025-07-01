@@ -201,7 +201,7 @@ const App: FC = () => {
 
   // Inactivity logout timer
   React.useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
     const resetTimer = () => {
       if (timer) clearTimeout(timer);

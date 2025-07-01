@@ -3,9 +3,10 @@ import { Form, Input, Button, Typography, Alert, Card } from 'antd';
 
 type LoginComponentProps = {
     onLoginSuccess?: () => void;
+    form: any,
 };
 
-class LoginComponent extends React.Component<LoginComponentProps & any, { errorMsg: string }> {
+class LoginComponent extends React.Component<LoginComponentProps, { errorMsg: string }> {
     state = { errorMsg: '' };
 
     handleSubmit = (e: React.FormEvent) => {
@@ -125,4 +126,4 @@ class LoginComponent extends React.Component<LoginComponentProps & any, { errorM
     }
 }
 
-export default Form.create()(LoginComponent);
+export default Form.create<LoginComponentProps>()(LoginComponent);
